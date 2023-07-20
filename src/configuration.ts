@@ -1,18 +1,18 @@
-import * as orm from '@midwayjs/typeorm';
-import { Configuration, App, Config, Inject } from '@midwayjs/decorator';
-import * as koa from '@midwayjs/koa';
-import * as validate from '@midwayjs/validate';
-import * as info from '@midwayjs/info';
-import { join } from 'path';
-import * as view from '@midwayjs/view-ejs';
-import * as staticFile from '@midwayjs/static-file';
-import * as localTask from '@midwayjs/task';
-// import * as crossDomain from '@midwayjs/cross-domain';
-import * as cool from '@cool-midway/core';
-import * as cloud from '@cool-midway/cloud';
-import * as file from '@cool-midway/file';
-import * as sms from '@cool-midway/sms';
-import { ILogger } from '@midwayjs/logger';
+import * as orm from "@midwayjs/typeorm";
+import { Configuration, App, Config, Inject } from "@midwayjs/decorator";
+import * as koa from "@midwayjs/koa";
+import * as validate from "@midwayjs/validate";
+import * as info from "@midwayjs/info";
+import { join } from "path";
+import * as view from "@midwayjs/view-ejs";
+import * as staticFile from "@midwayjs/static-file";
+import * as localTask from "@midwayjs/task";
+import * as crossDomain from "@midwayjs/cross-domain";
+import * as cool from "@cool-midway/core";
+import * as cloud from "@cool-midway/cloud";
+import * as file from "@cool-midway/file";
+import * as sms from "@cool-midway/sms";
+import { ILogger } from "@midwayjs/logger";
 // import * as rpc from '@cool-midway/rpc';
 // import * as task from '@cool-midway/task';
 // import * as pay from '@cool-midway/pay';
@@ -23,7 +23,7 @@ import { ILogger } from '@midwayjs/logger';
     // https://koajs.com/
     koa,
     // 是否开启跨域(注：顺序不能乱放！！！) http://www.midwayjs.org/docs/extensions/cross_domain
-    // crossDomain,
+    crossDomain,
     // 模板渲染 https://midwayjs.org/docs/extensions/render
     view,
     // 静态文件托管 https://midwayjs.org/docs/extensions/static_file
@@ -52,10 +52,10 @@ import { ILogger } from '@midwayjs/logger';
     sms,
     {
       component: info,
-      enabledEnvironment: ['local'],
+      enabledEnvironment: ["local"],
     },
   ],
-  importConfigs: [join(__dirname, './config')],
+  importConfigs: [join(__dirname, "./config")],
 })
 export class ContainerLifeCycle {
   @App()
@@ -64,7 +64,7 @@ export class ContainerLifeCycle {
   @Inject()
   logger: ILogger;
 
-  @Config('module')
+  @Config("module")
   config;
 
   async onReady() {
@@ -76,14 +76,14 @@ export class ContainerLifeCycle {
    * 检查配置
    */
   async checkConfig() {
-    if (this.config.base.jwt.secret === 'cool-admin-xxxxxx') {
+    if (this.config.base.jwt.secret === "cool-admin-xxxxxx") {
       this.logger.warn(
-        '安全起见，请修改[base]模块配置文件 config.ts 中的 jwt.secret 为随机字符串'
+        "安全起见，请修改[base]模块配置文件 config.ts 中的 jwt.secret 为随机字符串"
       );
     }
-    if (this.config.user.jwt.secret == 'cool-app-xxxxxx') {
+    if (this.config.user.jwt.secret == "cool-app-xxxxxx") {
       this.logger.warn(
-        '安全起见，请修改[user]模块配置文件 config.ts 中的 jwt.secret 为随机字符串'
+        "安全起见，请修改[user]模块配置文件 config.ts 中的 jwt.secret 为随机字符串"
       );
     }
   }
